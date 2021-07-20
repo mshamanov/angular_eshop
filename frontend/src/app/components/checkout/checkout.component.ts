@@ -40,8 +40,7 @@ export class CheckoutComponent implements OnInit {
     private shopFormService: ShopFormService,
     private cartService: CartService,
     private checkoutService: CheckoutService,
-    private router: Router,
-    private oktaAuthService: OktaAuthService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
