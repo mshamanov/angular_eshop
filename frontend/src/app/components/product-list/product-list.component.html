@@ -1,0 +1,73 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <h4>{{ currentCategoryName }}</h4>
+    <hr />
+    <div class="container-fluid">
+      <div class="row">
+        <!-- loop over the collection of products-->
+        <div
+          *ngFor="let tempProduct of products"
+          class="col-md-3 col-sm-6 col-xs-12"
+        >
+          <div class="product-box">
+            <a routerLink="/products/{{ tempProduct.id }}">
+              <img src="{{ tempProduct.imageUrl }}" class="img-responsive" />
+            </a>
+            <h1>
+              <a routerLink="/products/{{ tempProduct.id }}">
+                {{ tempProduct.name }}
+              </a>
+            </h1>
+            <div class="product-bottom">
+              <div class="price">
+                {{ tempProduct.unitPrice | currency: "USD" }}
+              </div>
+              <button (click)="addToCart(tempProduct)" href="#" class="btn btn-primary btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="products?.length == 0"
+          class="alert alert-warning col-sm-12"
+          role="alert"
+        >
+          Products not found
+        </div>
+      </div>
+      <!--- pagination -->
+      <div
+        *ngIf="products?.length != 0"
+        class="d-flex justify-content-center"
+      >
+        <div class="mx-auto">
+          <ngb-pagination
+            [(page)]="pageNumber"
+            [pageSize]="pageSize"
+            [collectionSize]="totalElements"
+            [maxSize]="5"
+            [boundaryLinks]="true"
+            (pageChange)="listProducts()"
+          >
+          </ngb-pagination>
+        </div>
+        <div><p class="pt-2 pe-2"><b>Page size:</b></p></div>
+        <div>
+          <select
+            class="form-select"
+            (change)="updatePageSize($any($event.target).value)"
+          >
+            <option
+              *ngFor="let size of availablePageSizes; let first = first"
+              value="{{ size }}"
+              [attr.selected]="first ? '' : null"
+            >
+              {{ size }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <!---end of pagination -->
+    </div>
+  </div>
+</div>

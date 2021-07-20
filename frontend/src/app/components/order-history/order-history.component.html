@@ -1,0 +1,41 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div *ngIf="orderHistoryList.length == 0; else detailsTable" class="alert alert-warning col-sm-12" role="alert">
+        You have no orders
+      </div>
+      <ng-template #detailsTable>
+        <h3>Your orders</h3>
+        <table class="table table-bordered" style="table-layout: fixed">
+          <thead>
+            <tr>
+              <th width="10%">No.</th>
+              <th width="30%">Tracking Number</th>
+              <th width="20%">Total Price</th>
+              <th width="20%">Total Quantity</th>
+              <th width="20%">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let orderHistory of orderHistoryList; let count = index">
+              <td>
+                {{count + 1}}
+              </td>
+              <td>
+                {{orderHistory.orderTrackingNumber}}
+              </td>
+              <td>
+                {{orderHistory.totalPrice | currency: 'USD'}}
+              </td>
+              <td>
+                {{orderHistory.totalQuantity}}
+              </td>
+              <td>
+                {{orderHistory.dateCreated | date: 'dd MMM yyyy, HH:mm a'}}
+              </td>
+            </tr>
+        </table>
+      </ng-template>
+    </div>
+  </div>
+</div>

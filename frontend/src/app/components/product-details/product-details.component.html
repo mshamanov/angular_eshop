@@ -1,0 +1,16 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div>
+      <img src="{{ product.imageUrl }}" class="detail-img" width="200px" />
+      <h3>{{ product.name }}</h3>
+      <div class="price">{{ product.unitPrice | currency: "USD" }}</div>
+      <button class="btn btn-primary" (click)="addToCart()">Add to cart</button>
+      <hr />
+      <h3>Description</h3>
+      <p>{{ product.description }}</p>
+      <div class="mt-2">
+        <a href="javascript: history.go(-1)"><b>Back to Product List</b></a>
+      </div>
+    </div>
+  </div>
+</div>
